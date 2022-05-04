@@ -1,5 +1,5 @@
-import User from "../../models/user.model";
-import UserStatus from "../../models/userStatus.model";
+import User from "../api/models/user.model";
+import UserStatus from "../api/models/userStatus.model";
 import {broadcastUsersList, sendUsersList} from "./userStatus.socket";
 import {getMessage} from "./message.socket";
 
@@ -14,6 +14,7 @@ export const socketConnection = (socket) => {
         userStatus["online"]   = true
         userStatus["socketId"] = socket.id
         await userStatus.save()
+        await sendUsersList(socket, userId)
         await broadcastUsersList(socket)
     })
 

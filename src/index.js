@@ -4,7 +4,7 @@ import {port} from './config/vars'
 import mongoose from "./config/mongoose"
 import http from 'http'
 import io from './config/socketIo'
-import {socketConnection} from "./api/routes/sockets";
+import {socketConnection} from "./sockets";
 
 // open mongoose connection
 (async () => await mongoose.connect())()
