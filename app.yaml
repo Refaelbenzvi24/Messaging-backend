@@ -1,0 +1,13 @@
+runtime: nodejs16
+
+service: api
+
+env_variables:
+  NODE_ENV: $NODE_ENV
+  MONGO_URI: $MONGO_URI
+  JWT_SECRET: $JWT_SECRET
+  JWT_EXPIRATION_MINUTES: $JWT_EXPIRATION_MINUTES
+  JWT_REFRESH_TOKEN_EXPIRATION_DAYS: $JWT_REFRESH_TOKEN_EXPIRATION_DAYS
+
+network:
+  session_affinity: true

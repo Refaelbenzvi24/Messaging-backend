@@ -1,8 +1,11 @@
 import express    from 'express'
-import router     from '../api/routes/v1'
 import bodyParser from 'body-parser'
+import compress from 'compression'
+import methodOverride from 'method-override'
 import cors from 'cors'
+import helmet from 'helmet'
 import passport from 'passport'
+import routes     from '../api/routes/v1'
 import strategies from './passport'
 import * as error from '../api/middlewares/error'
 
@@ -13,6 +16,16 @@ const app = express()
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 
+// gzip compression
+app.use(compress())
+
+// lets you use HTTP verbs such as PUT or DELETE
+// in places where the client doesn't support it
+app.use(methodOverride())
+
+// secure apps by setting various HTTP headers
+app.use(helmet())
+
 // enable CORS - Cross Origin Resource Sharing
 app.use(cors())
 
@@ -21,7 +34,7 @@ app.use(passport.initialize())
 passport.use('jwt', strategies.jwt)
 
 // mount api v1 routes
-app.use("/v1", router)
+app.use("/v1", routes)
 
 // if error is not an instanceOf APIError, convert it.
 app.use(error.converter)

@@ -1,11 +1,11 @@
 import SocketIo from "socket.io"
-import { env, clientUrl } from "./vars"
+import {env, clientUrl} from "./vars"
 
 const config = {}
 
 if (env === "development") {
     config["cors"] = {
-        origin: clientUrl,
+        origin:  "*",
         methods: ["GET", "POST"]
     }
 }

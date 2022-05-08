@@ -8,13 +8,14 @@ if (process.env.NODE_ENV === 'development') {
     })
 }
 
+env.config()
+
 module.exports = {
-    env:  process.env.NODE_ENV || 'development',
-    port: process.env.PORT || 8080,
-    clientUrl: process.env.CLIENT_URL || 'http://localhost:8080',
+    env:                               process.env.NODE_ENV || 'development',
+    port:                              process.env.PORT || 8080,
     jwtSecret:                         process.env.JWT_SECRET,
-    jwtExpirationInterval:             process.env.JWT_EXPIRATION_MINUTES,
-    jwtRefreshTokenExpirationInterval: process.env.JWT_REFRESH_TOKEN_EXPIRATION_DAYS,
+    jwtExpirationInterval:             parseInt(process.env.JWT_EXPIRATION_MINUTES) || 45,
+    jwtRefreshTokenExpirationInterval: parseInt(process.env.JWT_REFRESH_TOKEN_EXPIRATION_DAYS) || 60,
     mongo:                             {
         uri: process.env.MONGO_URI,
     },
