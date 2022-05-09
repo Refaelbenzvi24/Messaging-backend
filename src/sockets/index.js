@@ -1,6 +1,6 @@
 import User from "../api/models/user.model";
 import UserStatus from "../api/models/userStatus.model";
-import {broadcastUsersList, sendUsersList} from "./userStatus.socket";
+import {broadcastUsersList, sendUsersStatus} from "./userStatus.socket";
 import {getMessage} from "./message.socket";
 
 export const socketConnection = (socket) => {
@@ -14,13 +14,13 @@ export const socketConnection = (socket) => {
         userStatus["online"]   = true
         userStatus["socketId"] = socket.id
         await userStatus.save()
-        await sendUsersList(socket, userId)
         await broadcastUsersList(socket)
+        await sendUsersStatus(socket, userId)
     })
 
     getMessage(socket)
 
-    socket.on("disconnect", async () => {
+    socket.on("disconnect", () => {
         if (userStatus) {
             userStatus["online"]     = false
             userStatus["socketId"]   = null
