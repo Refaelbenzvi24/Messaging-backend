@@ -4,6 +4,8 @@ This project is a RESTful API for a message service. <br/>
 Created with Node.js Express Mongoose and Socket.io. <br/>
 It's the backend of the messaging service.
 
+[To the frontend repo](https://github.com/Refaelbenzvi24/Messaging-frontend)
+
 ## Usage
 
     git clone git@github.com:refaelbenzvi24/Messaging-backend.git
